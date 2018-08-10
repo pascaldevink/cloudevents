@@ -37,3 +37,10 @@ before_script:
 script:
   - vendor/bin/phpcs src/
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+after_script:
+  - |
+    if [[ "$TRAVIS_PHP_VERSION" == '7.2']]; then
+      wget https://scrutinizer-ci.com/ocular.phar
+      php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    fi
