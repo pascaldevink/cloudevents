@@ -37,6 +37,11 @@ class CloudEvent
     private $schemaUrl;
 
     /**
+     * @var null|Extensions
+     */
+    private $extensions;
+
+    /**
      * @var null|Data
      */
     private $data;
@@ -48,6 +53,7 @@ class CloudEvent
         EventId $eventId,
         ?EventTime $eventTime = null,
         ?SchemaUrl $schemaUrl = null,
+        ?Extensions $extensions = null,
         ?Data $data = null
     ) {
         $this->eventType          = $eventType;
@@ -56,6 +62,7 @@ class CloudEvent
         $this->eventId            = $eventId;
         $this->eventTime          = $eventTime;
         $this->schemaUrl          = $schemaUrl;
+        $this->extensions         = $extensions;
         $this->data               = $data;
     }
 
@@ -89,6 +96,11 @@ class CloudEvent
         return $this->schemaUrl;
     }
 
+    public function getExtensions() : ?Extensions
+    {
+        return $this->extensions;
+    }
+
     public function getData() : ?Data
     {
         return $this->data;
@@ -105,6 +117,7 @@ class CloudEvent
             'eventTime' => $this->data ? (string) $this->eventTime : null,
             'schemaURL' => $this->data ? (string) $this->schemaUrl : null,
             'contentType' => $this->data ? (string) $this->data->getContentType() : null,
+            'extensions' => $this->extensions ? $this->extensions->getKeyValuePairs() : null,
             'data' => $this->data ? $this->data->getData() : null,
         ];
     }
