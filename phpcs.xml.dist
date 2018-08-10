@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ruleset name="CloudEvents">
+    <rule ref="PSR2" />
+
+    <!-- Tests use snake case for improved readability of test methods -->
+    <rule ref="PSR1.Methods.CamelCapsMethodName">
+        <exclude-pattern>tests/**</exclude-pattern>
+    </rule>
+</ruleset>
