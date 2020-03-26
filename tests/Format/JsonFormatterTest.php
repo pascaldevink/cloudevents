@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace PascalDeVink\CloudEvents\Format\Test;
+namespace PascalDeVink\CloudEvents\Test\Format;
 
 use DateTimeImmutable;
 use League\Uri\Uri;
-use PascalDeVink\CloudEvents\CloudEvent;
-use PascalDeVink\CloudEvents\ContentEncoding;
-use PascalDeVink\CloudEvents\SpecVersion;
-use PascalDeVink\CloudEvents\EventId;
-use PascalDeVink\CloudEvents\EventTime;
-use PascalDeVink\CloudEvents\EventType;
+use PascalDeVink\CloudEvents\V03\CloudEvent;
+use PascalDeVink\CloudEvents\V03\ContentEncoding;
+use PascalDeVink\CloudEvents\V03\SpecVersion;
+use PascalDeVink\CloudEvents\V03\EventId;
+use PascalDeVink\CloudEvents\V03\EventTime;
+use PascalDeVink\CloudEvents\V03\EventType;
 use PascalDeVink\CloudEvents\Extension\DistributedTracing;
-use PascalDeVink\CloudEvents\Extensions;
+use PascalDeVink\CloudEvents\V03\Extensions;
 use PascalDeVink\CloudEvents\Format\JsonFormatter;
-use PascalDeVink\CloudEvents\JsonData;
-use PascalDeVink\CloudEvents\SchemaUrl;
-use PascalDeVink\CloudEvents\Source;
-use PascalDeVink\CloudEvents\Subject;
+use PascalDeVink\CloudEvents\V03\JsonData;
+use PascalDeVink\CloudEvents\V03\SchemaUrl;
+use PascalDeVink\CloudEvents\V03\Source;
+use PascalDeVink\CloudEvents\V03\Subject;
 use PHPUnit\Framework\TestCase;
 
 /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PascalDeVink\CloudEvents\Format;
 
-use PascalDeVink\CloudEvents\CloudEvent;
+use PascalDeVink\CloudEvents\V03\CloudEvent;
 
 class JsonFormatter
 {

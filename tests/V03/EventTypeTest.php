@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PascalDeVink\CloudEvents\Test;
+namespace PascalDeVink\CloudEvents\Test\V03;
 
 use InvalidArgumentException;
-use PascalDeVink\CloudEvents\EventType;
+use PascalDeVink\CloudEvents\V03\EventType;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \PascalDeVink\CloudEvents\EventType
+ * @covers \PascalDeVink\CloudEvents\V03\EventType
  */
 class EventTypeTest extends TestCase
 {

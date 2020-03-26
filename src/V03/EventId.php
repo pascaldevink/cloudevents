@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PascalDeVink\CloudEvents;
+namespace PascalDeVink\CloudEvents\V03;
 
 use Webmozart\Assert\Assert;
 
-final class Subject
+class EventId
 {
     private string $value;
 

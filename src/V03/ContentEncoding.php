@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PascalDeVink\CloudEvents;
+namespace PascalDeVink\CloudEvents\V03;
 
 use Webmozart\Assert\Assert;
 

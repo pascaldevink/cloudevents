@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PascalDeVink\CloudEvents;
+namespace PascalDeVink\CloudEvents\Test\V03;
 
 use PascalDeVink\CloudEvents\Extension\DistributedTracing;
+use PascalDeVink\CloudEvents\V03\Extensions;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \PascalDeVink\CloudEvents\Extensions
+ * @covers \PascalDeVink\CloudEvents\V03\Extensions
  */
 class ExtensionsTest extends TestCase
 {

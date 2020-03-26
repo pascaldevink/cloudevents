@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PascalDeVink\CloudEvents;
+namespace PascalDeVink\CloudEvents\V03;
 
 use Webmozart\Assert\Assert;
 
-class SpecVersion
+final class Subject
 {
-    /**
-     * @var string
-     */
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {

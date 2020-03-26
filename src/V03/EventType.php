@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PascalDeVink\CloudEvents;
+namespace PascalDeVink\CloudEvents\V03;
 
 use Webmozart\Assert\Assert;
 
-class EventId
+class EventType
 {
-    private string $value;
+    private string  $value;
 
     public function __construct(string $value)
     {
         Assert::notWhitespaceOnly($value);
 
-        $this->value = $value;
+        $this->value   = $value;
     }
 
     public function __toString() : string

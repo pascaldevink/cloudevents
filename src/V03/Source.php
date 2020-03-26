@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PascalDeVink\CloudEvents;
+namespace PascalDeVink\CloudEvents\V03;
 
 use League\Uri\Contracts\UriInterface;
 
-class SchemaUrl
+class Source
 {
     private UriInterface $uri;
 
