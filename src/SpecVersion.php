@@ -6,7 +6,7 @@ namespace PascalDeVink\CloudEvents;
 
 use Webmozart\Assert\Assert;
 
-class CloudEventsVersion
+class SpecVersion
 {
     /**
      * @var string

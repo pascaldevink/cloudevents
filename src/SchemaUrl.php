@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace PascalDeVink\CloudEvents;
 
-use League\Uri\Interfaces\Uri;
+use League\Uri\Contracts\UriInterface;
 
 class SchemaUrl
 {
-    /**
-     * @var Uri
-     */
-    private $uri;
+    private UriInterface $uri;
 
-    public function __construct(Uri $uri)
+    public function __construct(UriInterface $uri)
     {
         $this->uri = $uri;
     }

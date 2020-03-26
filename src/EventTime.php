@@ -8,10 +8,7 @@ use DateTimeImmutable;
 
 class EventTime
 {
-    /**
-     * @var DateTimeImmutable
-     */
-    private $value;
+    private DateTimeImmutable $value;
 
     public function __construct(DateTimeImmutable $value)
     {

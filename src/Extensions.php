@@ -5,19 +5,13 @@ declare(strict_types=1);
 namespace PascalDeVink\CloudEvents;
 
 use PascalDeVink\CloudEvents\Extension\Extension;
-use Webmozart\Assert\Assert;
 
 class Extensions
 {
-    /**
-     * @var array
-     */
-    private $listOfExtensions;
+    private array $listOfExtensions;
 
-    public function __construct(array $listOfExtensions = [])
+    public function __construct(Extension ...$listOfExtensions)
     {
-        Assert::allIsInstanceOf($listOfExtensions, Extension::class);
-
         $this->listOfExtensions = $listOfExtensions;
     }
 

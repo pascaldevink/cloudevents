@@ -11,34 +11,42 @@ final class JsonData implements Data
      */
     private $data;
 
-    private function __construct($data)
+    private ContentEncoding $contentEncoding;
+
+    private function __construct($data, ContentEncoding $contentEncoding)
     {
-        $this->data = $data;
+        $this->data            = $data;
+        $this->contentEncoding = $contentEncoding;
     }
 
-    public static function fromString(string $data) : self
+    public static function fromString(string $data, ContentEncoding $contentEncoding) : self
     {
-        return new self($data);
+        return new self($data, $contentEncoding);
     }
 
-    public static function fromInteger(int $data) : self
+    public static function fromInteger(int $data, ContentEncoding $contentEncoding) : self
     {
-        return new self($data);
+        return new self($data, $contentEncoding);
     }
 
-    public static function fromBoolean(bool $data) : self
+    public static function fromBoolean(bool $data, ContentEncoding $contentEncoding) : self
     {
-        return new self($data);
+        return new self($data, $contentEncoding);
     }
 
-    public static function fromArray(array $data) : self
+    public static function fromArray(array $data, ContentEncoding $contentEncoding) : self
     {
-        return new self($data);
+        return new self($data, $contentEncoding);
     }
 
     public function getContentType() : ContentType
     {
         return new ContentType('application/json');
+    }
+
+    public function getContentEncoding() : ContentEncoding
+    {
+        return $this->contentEncoding;
     }
 
     public function getData()

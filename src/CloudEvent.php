@@ -6,79 +6,44 @@ namespace PascalDeVink\CloudEvents;
 
 class CloudEvent
 {
-    /**
-     * @var EventType
-     */
-    private $eventType;
+    private EventId     $eventId;
 
-    /**
-     * @var CloudEventsVersion
-     */
-    private $cloudEventsVersion;
+    private Source      $source;
 
-    /**
-     * @var Source
-     */
-    private $source;
+    private SpecVersion $specVersion;
 
-    /**
-     * @var EventId
-     */
-    private $eventId;
+    private EventType   $eventType;
 
-    /**
-     * @var null|EventTime
-     */
-    private $eventTime;
+    private ?SchemaUrl  $schemaUrl;
 
-    /**
-     * @var null|SchemaUrl
-     */
-    private $schemaUrl;
+    private ?Subject    $subject;
 
-    /**
-     * @var null|Extensions
-     */
-    private $extensions;
+    private ?EventTime  $eventTime;
 
-    /**
-     * @var null|Data
-     */
-    private $data;
+    private ?Extensions $extensions;
+
+    private ?Data       $data;
 
     public function __construct(
-        EventType $eventType,
-        CloudEventsVersion $cloudEventsVersion,
-        Source $source,
         EventId $eventId,
-        ?EventTime $eventTime = null,
+        Source $source,
+        SpecVersion $specVersion,
+        EventType $eventType,
         ?SchemaUrl $schemaUrl = null,
+        ?Subject $subject = null,
+        ?EventTime $eventTime = null,
         ?Extensions $extensions = null,
         ?Data $data = null
     ) {
-        $this->eventType          = $eventType;
-        $this->cloudEventsVersion = $cloudEventsVersion;
-        $this->source             = $source;
-        $this->eventId            = $eventId;
-        $this->eventTime          = $eventTime;
-        $this->schemaUrl          = $schemaUrl;
-        $this->extensions         = $extensions;
-        $this->data               = $data;
-    }
-
-    public function getEventType() : EventType
-    {
-        return $this->eventType;
-    }
-
-    public function getCloudEventsVersion() : CloudEventsVersion
-    {
-        return $this->cloudEventsVersion;
-    }
-
-    public function getSource() : Source
-    {
-        return $this->source;
+        $this->eventId     = $eventId;
+        $this->source      = $source;
+        $this->specVersion = $specVersion;
+        $this->eventType   = $eventType;
+        $this->subject     = $subject;
+        $this->eventTime   = $eventTime;
+        $this->schemaUrl   = $schemaUrl;
+        $this->extensions  = $extensions;
+        $this->data        = $data;
     }
 
     public function getEventId() : EventId
@@ -86,14 +51,34 @@ class CloudEvent
         return $this->eventId;
     }
 
-    public function getEventTime() : ?EventTime
+    public function getSource() : Source
     {
-        return $this->eventTime;
+        return $this->source;
+    }
+
+    public function getSpecVersion() : SpecVersion
+    {
+        return $this->specVersion;
+    }
+
+    public function getEventType() : EventType
+    {
+        return $this->eventType;
     }
 
     public function getSchemaUrl() : ?SchemaUrl
     {
         return $this->schemaUrl;
+    }
+
+    public function getSubject() : ?Subject
+    {
+        return $this->subject;
+    }
+
+    public function getEventTime() : ?EventTime
+    {
+        return $this->eventTime;
     }
 
     public function getExtensions() : ?Extensions
@@ -109,16 +94,15 @@ class CloudEvent
     public function toArray() : array
     {
         return [
-            'eventType' => $this->eventType->getValue(),
-            'eventTypeVersion' => $this->eventType->getVersion(),
-            'cloudEventsVersion' => (string) $this->cloudEventsVersion,
-            'source' => (string) $this->source,
-            'eventID' => (string) $this->eventId,
-            'eventTime' => $this->data ? (string) $this->eventTime : null,
-            'schemaURL' => $this->data ? (string) $this->schemaUrl : null,
-            'contentType' => $this->data ? (string) $this->data->getContentType() : null,
-            'extensions' => $this->extensions ? $this->extensions->getKeyValuePairs() : null,
-            'data' => $this->data ? $this->data->getData() : null,
+            'specversion'     => (string)$this->specVersion,
+            'type'            => (string)$this->eventType,
+            'source'          => (string)$this->source,
+            'subject'         => $this->subject ? (string)$this->subject : null,
+            'id'              => (string)$this->eventId,
+            'time'            => $this->data ? (string)$this->eventTime : null,
+            'datacontenttype' => $this->data ? (string)$this->data->getContentType() : null,
+            'extensions'      => $this->extensions ? $this->extensions->getKeyValuePairs() : null,
+            'data'            => $this->data ? $this->data->getData() : null,
         ];
     }
 }

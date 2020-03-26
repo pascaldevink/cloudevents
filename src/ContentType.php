@@ -6,10 +6,7 @@ namespace PascalDeVink\CloudEvents;
 
 class ContentType
 {
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
     public function __construct(string $type)
     {

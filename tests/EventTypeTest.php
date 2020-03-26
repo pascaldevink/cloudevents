@@ -13,27 +13,14 @@ use PHPUnit\Framework\TestCase;
  */
 class EventTypeTest extends TestCase
 {
-
     /**
      * @test
      */
-    public function it_should_be_possible_to_create_an_event_type_without_a_version()
+    public function it_should_be_possible_to_create_an_event_type()
     {
         $eventType = new EventType('com.github.pull.create');
 
-        $this->assertSame('com.github.pull.create', $eventType->getValue());
-        $this->assertNull($eventType->getVersion());
-    }
-
-    /**
-     * @test
-     */
-    public function it_should_be_possible_to_create_an_event_type_with_a_version()
-    {
-        $eventType = new EventType('com.github.pull.create', '1.0.0');
-
-        $this->assertSame('com.github.pull.create', $eventType->getValue());
-        $this->assertSame('1.0.0', $eventType->getVersion());
+        $this->assertSame('com.github.pull.create', $eventType->__toString());
     }
 
     /**
@@ -43,16 +30,6 @@ class EventTypeTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new EventType('', null);
-    }
-
-    /**
-     * @test
-     */
-    public function it_should_not_be_possible_to_create_an_event_type_with_an_empty_version()
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        new EventType('com.github.pull.create', '');
+        new EventType('');
     }
 }

@@ -6,15 +6,15 @@ namespace PascalDeVink\CloudEvents;
 
 use Webmozart\Assert\Assert;
 
-class EventType
+final class Subject
 {
-    private string  $value;
+    private string $value;
 
     public function __construct(string $value)
     {
         Assert::notWhitespaceOnly($value);
 
-        $this->value   = $value;
+        $this->value = $value;
     }
 
     public function __toString() : string
