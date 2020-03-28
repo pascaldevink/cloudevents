@@ -3,7 +3,6 @@ language: php
 
 php:
   - 7.4
-  - nightly
 
 # This triggers builds to run on the new TravisCI infrastructure.
 # See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
@@ -18,11 +17,7 @@ matrix:
   include:
     - php: 7.4
       env: dependencies=lowest
-    - php: nightly
-      env: dependencies=lowest
     - php: 7.4
-      env: dependencies=highest
-    - php: nightly
       env: dependencies=highest
 
 ## Update composer and run the appropriate composer command
