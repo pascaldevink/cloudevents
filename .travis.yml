@@ -2,7 +2,7 @@ dist: trusty
 language: php
 
 php:
-  - 7.2
+  - 7.4
   - nightly
 
 # This triggers builds to run on the new TravisCI infrastructure.
@@ -16,11 +16,11 @@ cache:
 
 matrix:
   include:
-    - php: 7.2
+    - php: 7.4
       env: dependencies=lowest
     - php: nightly
       env: dependencies=lowest
-    - php: 7.2
+    - php: 7.4
       env: dependencies=highest
     - php: nightly
       env: dependencies=highest
@@ -41,7 +41,7 @@ script:
 
 after_script:
   - |
-    if [ "$TRAVIS_PHP_VERSION" == '7.2' ]; then
+    if [ "$TRAVIS_PHP_VERSION" == '7.4' ]; then
       wget https://scrutinizer-ci.com/ocular.phar
       php ocular.phar code-coverage:upload --format=php-clover coverage.clover
     fi
