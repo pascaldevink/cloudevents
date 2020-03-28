@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-PHP Implementation of [CloudEvents][link-cloudevents]. Supports version 0.1 of the specification.
+PHP Implementation of [CloudEvents][link-cloudevents]. Supports version 0.3 of the specification.
 
 ## Install
 
@@ -20,13 +20,15 @@ $ composer require pascaldevink/cloudevents
 ## Usage
 
 ``` php
-$cloudEvent = new \PascalDeVink\CloudEvent(
-    new EventType('com.github.pull.create', '1.0.0'),
-    new CloudEventsVersion('0.1'),
-    new Source(Uri::createFromString('github://pull')),
+$cloudEvent = new \PascalDeVink\CloudEvents\V03\CloudEvent(
     new EventId('89328232-6202-4758-8050-C9E4690431CA'),
-    new EventTime(new DateTimeImmutable('2018-08-09T21:55:16+00:00')),
+    new Source(Uri::createFromString('github://pull')),
+    new SpecVersion('0.3'),
+    new EventType('com.github.pull.create'),
     new SchemaUrl(Uri::createFromString('http://github.com/schema/pull')),
+    new Subject('1234'),
+    new EventTime(new DateTimeImmutable('2018-08-09T21:55:16+00:00')),
+    null,
     JsonData::fromArray([])
 );
 

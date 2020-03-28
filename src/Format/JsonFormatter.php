@@ -8,7 +8,7 @@ use PascalDeVink\CloudEvents\V03\CloudEvent;
 
 class JsonFormatter
 {
-    public function format(CloudEvent $cloudEvent) : string
+    public function encode(CloudEvent $cloudEvent) : string
     {
         return json_encode(
             array_filter(
@@ -16,7 +16,15 @@ class JsonFormatter
                 function ($value) {
                     return null !== $value;
                 }
-            )
+            ),
+            JSON_THROW_ON_ERROR
         );
+    }
+
+    public function decode(string $json) : CloudEvent
+    {
+        $eventData = json_decode($json, true);
+
+        return CloudEvent::fromArray($eventData);
     }
 }

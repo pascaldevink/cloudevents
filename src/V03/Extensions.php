@@ -15,6 +15,14 @@ class Extensions
         $this->listOfExtensions = $listOfExtensions;
     }
 
+    /**
+     * @return Extension[]
+     */
+    public function getListOfExtensions() : array
+    {
+        return $this->listOfExtensions;
+    }
+
     public function getKeyValuePairs() : array
     {
         return array_merge(

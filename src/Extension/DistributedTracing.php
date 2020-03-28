@@ -6,27 +6,38 @@ namespace PascalDeVink\CloudEvents\Extension;
 
 class DistributedTracing implements Extension
 {
-    /**
-     * @var string
-     */
-    private $traceparent;
+    private string $traceParent;
 
-    /**
-     * @var null|string
-     */
-    private $tracestate;
+    private ?string $traceState;
 
-    public function __construct(string $traceparent, ?string $tracestate = null)
+    public function __construct(string $traceParent, ?string $traceState = null)
     {
-        $this->traceparent = $traceparent;
-        $this->tracestate = $tracestate;
+        $this->traceParent = $traceParent;
+        $this->traceState  = $traceState;
     }
 
     public function toArray() : array
     {
         return [
-            'traceparent' => $this->traceparent,
-            'tracestate' => $this->tracestate,
+            'DistributedTracingExtension' => [
+                'traceparent' => $this->traceParent,
+                'tracestate'  => $this->traceState,
+            ],
         ];
+    }
+
+    public function getName() : string
+    {
+        return 'DistributedTracingExtension';
+    }
+
+    public function getTraceParent() : string
+    {
+        return $this->traceParent;
+    }
+
+    public function getTraceState() : ?string
+    {
+        return $this->traceState;
     }
 }

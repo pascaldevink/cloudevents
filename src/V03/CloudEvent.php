@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace PascalDeVink\CloudEvents\V03;
 
+use DateTimeImmutable;
+use League\Uri\Uri;
+use PascalDeVink\CloudEvents\Extension\DistributedTracing;
+use Webmozart\Assert\Assert;
+
 class CloudEvent
 {
     private EventId     $eventId;
@@ -44,6 +49,48 @@ class CloudEvent
         $this->schemaUrl   = $schemaUrl;
         $this->extensions  = $extensions;
         $this->data        = $data;
+    }
+
+    public static function fromArray(array $eventData) : self
+    {
+        Assert::keyExists($eventData, 'type');
+        Assert::keyExists($eventData, 'source');
+        Assert::keyExists($eventData, 'id');
+
+        $data = null;
+
+        if (isset($eventData['data']) === true) {
+            Assert::keyExists($eventData, 'datacontenttype');
+            Assert::keyExists($eventData, 'datacontentencoding');
+
+            $data = JsonData::fromArray(
+                $eventData['data'],
+                new ContentEncoding($eventData['datacontentencoding'])
+            );
+        }
+
+        $extensions = null;
+
+        if (isset($eventData['DistributedTracingExtension']) === true) {
+            $extensions = new Extensions(
+                new DistributedTracing(
+                    $eventData['DistributedTracingExtension']['traceparent'],
+                    $eventData['DistributedTracingExtension']['tracestate'],
+                )
+            );
+        }
+
+        return new self(
+            new EventId($eventData['id']),
+            new Source(Uri::createFromString($eventData['source'])),
+            new SpecVersion('0.3'),
+            new EventType($eventData['type']),
+            isset($eventData['schemaurl']) ? new SchemaUrl(Uri::createFromString($eventData['schemaurl'])) : null,
+            isset($eventData['subject']) ? new Subject($eventData['subject']) : null,
+            isset($eventData['time']) ? new EventTime(new DateTimeImmutable($eventData['time'])) : null,
+            $extensions,
+            $data
+        );
     }
 
     public function getEventId() : EventId
@@ -93,16 +140,26 @@ class CloudEvent
 
     public function toArray() : array
     {
-        return [
-            'specversion'     => (string)$this->specVersion,
-            'type'            => (string)$this->eventType,
-            'source'          => (string)$this->source,
-            'subject'         => $this->subject ? (string)$this->subject : null,
-            'id'              => (string)$this->eventId,
-            'time'            => $this->data ? (string)$this->eventTime : null,
-            'datacontenttype' => $this->data ? (string)$this->data->getContentType() : null,
-            'extensions'      => $this->extensions ? $this->extensions->getKeyValuePairs() : null,
-            'data'            => $this->data ? $this->data->getData() : null,
-        ];
+        $extensions = [];
+
+        if ($this->extensions !== null) {
+            $extensions = $this->extensions->getKeyValuePairs();
+        }
+
+        return array_merge(
+            [
+                'specversion'         => (string)$this->specVersion,
+                'type'                => (string)$this->eventType,
+                'source'              => (string)$this->source,
+                'subject'             => $this->subject ? (string)$this->subject : null,
+                'id'                  => (string)$this->eventId,
+                'schemaurl'           => $this->schemaUrl ? (string)$this->schemaUrl : null,
+                'time'                => $this->data ? (string)$this->eventTime : null,
+                'datacontenttype'     => $this->data ? (string)$this->data->getContentType() : null,
+                'datacontentencoding' => $this->data ? (string)$this->data->getContentEncoding() : null,
+                'data'                => $this->data ? $this->data->getData() : null,
+            ],
+            $extensions
+        );
     }
 }

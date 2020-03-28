@@ -46,6 +46,23 @@ class CloudEventTest extends TestCase
     /**
      * @test
      */
+    public function it_should_be_possible_to_pass_a_subject()
+    {
+        $cloudEvent = new CloudEvent(
+            new EventId('89328232-6202-4758-8050-C9E4690431CA'),
+            new Source(Uri::createFromString('github://pull')),
+            new SpecVersion('0.1'),
+            new EventType('com.github.pull.create'),
+            null,
+            new Subject('1234'),
+        );
+
+        $this->assertNotNull($cloudEvent->getSubject());
+    }
+
+    /**
+     * @test
+     */
     public function it_should_be_possible_to_pass_an_event_time()
     {
         $cloudEvent = new CloudEvent(
@@ -141,20 +158,52 @@ class CloudEventTest extends TestCase
 
         $this->assertSame(
             [
-                'specversion'     => '0.3',
-                'type'            => 'com.github.pull.create',
-                'source'          => 'github://pull',
-                'subject'         => '123',
-                'id'              => '89328232-6202-4758-8050-C9E4690431CA',
-                'time'            => '2018-08-09T21:55:16+00:00',
-                'datacontenttype' => 'application/json',
-                'extensions'      => [
+                'specversion'                 => '0.3',
+                'type'                        => 'com.github.pull.create',
+                'source'                      => 'github://pull',
+                'subject'                     => '123',
+                'id'                          => '89328232-6202-4758-8050-C9E4690431CA',
+                'schemaurl'                   => 'http://github.com/schema/pull',
+                'time'                        => '2018-08-09T21:55:16+00:00',
+                'datacontenttype'             => 'application/json',
+                'datacontentencoding'         => 'base64',
+                'data'                        => [],
+                'DistributedTracingExtension' => [
                     'traceparent' => '00-F84CED4E37CB429D8ADA2D503CB9E111-44F11A993769-00',
                     'tracestate'  => 'foo=bar',
                 ],
-                'data'            => [],
             ],
             $cloudEventArray
         );
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_convert_an_array_to_a_cloud_event() : void
+    {
+        $array = [
+            'specversion'                 => '0.3',
+            'type'                        => 'com.github.pull.create',
+            'source'                      => 'github://pull',
+            'subject'                     => '123',
+            'id'                          => '89328232-6202-4758-8050-C9E4690431CA',
+            'schemaurl'                   => 'http://github.com/schema/pull',
+            'time'                        => '2018-08-09T21:55:16+00:00',
+            'datacontenttype'             => 'application/json',
+            'datacontentencoding'         => 'base64',
+            'data'                        => [],
+            'DistributedTracingExtension' => [
+                'traceparent' => '00-F84CED4E37CB429D8ADA2D503CB9E111-44F11A993769-00',
+                'tracestate'  => 'foo=bar',
+            ],
+        ];
+
+        $cloudEvent = CloudEvent::fromArray($array);
+
+        $this->assertNotNull($cloudEvent->getEventType());
+        $this->assertNotNull($cloudEvent->getSpecVersion());
+        $this->assertNotNull($cloudEvent->getSource());
+        $this->assertNotNull($cloudEvent->getEventId());
     }
 }

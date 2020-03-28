@@ -26,8 +26,10 @@ class ExtensionsTest extends TestCase
 
         $this->assertSame(
             [
-                'traceparent' => 'foo',
-                'tracestate'  => 'bar',
+                'DistributedTracingExtension' => [
+                    'traceparent' => 'foo',
+                    'tracestate'  => 'bar',
+                ],
             ],
             $flattenedMap
         );
