@@ -32,7 +32,6 @@ class CloudEvent
     public function __construct(
         EventId $eventId,
         Source $source,
-        SpecVersion $specVersion,
         EventType $eventType,
         ?SchemaUrl $schemaUrl = null,
         ?Subject $subject = null,
@@ -42,7 +41,7 @@ class CloudEvent
     ) {
         $this->eventId     = $eventId;
         $this->source      = $source;
-        $this->specVersion = $specVersion;
+        $this->specVersion = new SpecVersion('0.3');
         $this->eventType   = $eventType;
         $this->subject     = $subject;
         $this->eventTime   = $eventTime;
@@ -83,7 +82,6 @@ class CloudEvent
         return new self(
             new EventId($eventData['id']),
             new Source(Uri::createFromString($eventData['source'])),
-            new SpecVersion('0.3'),
             new EventType($eventData['type']),
             isset($eventData['schemaurl']) ? new SchemaUrl(Uri::createFromString($eventData['schemaurl'])) : null,
             isset($eventData['subject']) ? new Subject($eventData['subject']) : null,

@@ -33,7 +33,6 @@ class CloudEventTest extends TestCase
         $cloudEvent = new CloudEvent(
             new EventId('89328232-6202-4758-8050-C9E4690431CA'),
             new Source(Uri::createFromString('github://pull')),
-            new SpecVersion('0.1'),
             new EventType('com.github.pull.create')
         );
 
@@ -51,7 +50,6 @@ class CloudEventTest extends TestCase
         $cloudEvent = new CloudEvent(
             new EventId('89328232-6202-4758-8050-C9E4690431CA'),
             new Source(Uri::createFromString('github://pull')),
-            new SpecVersion('0.1'),
             new EventType('com.github.pull.create'),
             null,
             new Subject('1234'),
@@ -68,7 +66,6 @@ class CloudEventTest extends TestCase
         $cloudEvent = new CloudEvent(
             new EventId('89328232-6202-4758-8050-C9E4690431CA'),
             new Source(Uri::createFromString('github://pull')),
-            new SpecVersion('0.1'),
             new EventType('com.github.pull.create'),
             null,
             null,
@@ -86,7 +83,6 @@ class CloudEventTest extends TestCase
         $cloudEvent = new CloudEvent(
             new EventId('89328232-6202-4758-8050-C9E4690431CA'),
             new Source(Uri::createFromString('github://pull')),
-            new SpecVersion('0.1'),
             new EventType('com.github.pull.create'),
             new SchemaUrl(Uri::createFromString('http://github.com/schema/pull'))
         );
@@ -102,7 +98,6 @@ class CloudEventTest extends TestCase
         $cloudEvent = new CloudEvent(
             new EventId('89328232-6202-4758-8050-C9E4690431CA'),
             new Source(Uri::createFromString('github://pull')),
-            new SpecVersion('0.1'),
             new EventType('com.github.pull.create'),
             null,
             null,
@@ -123,7 +118,6 @@ class CloudEventTest extends TestCase
         $cloudEvent = new CloudEvent(
             new EventId('89328232-6202-4758-8050-C9E4690431CA'),
             new Source(Uri::createFromString('github://pull')),
-            new SpecVersion('0.1'),
             new EventType('com.github.pull.create'),
             null,
             null,
@@ -143,7 +137,6 @@ class CloudEventTest extends TestCase
         $cloudEvent = new CloudEvent(
             new EventId('89328232-6202-4758-8050-C9E4690431CA'),
             new Source(Uri::createFromString('github://pull')),
-            new SpecVersion('0.3'),
             new EventType('com.github.pull.create'),
             new SchemaUrl(Uri::createFromString('http://github.com/schema/pull')),
             new Subject('123'),

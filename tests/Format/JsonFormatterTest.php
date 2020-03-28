@@ -34,8 +34,7 @@ class JsonFormatterTest extends TestCase
         $cloudEvent = new CloudEvent(
             new EventId('89328232-6202-4758-8050-C9E4690431CA'),
             new Source(Uri::createFromString('github://pull')),
-            new SpecVersion('0.3'),
-            new EventType('com.github.pull.create', '1.0.0'),
+            new EventType('com.github.pull.create'),
             new SchemaUrl(Uri::createFromString('http://github.com/schema/pull')),
             new Subject('1234'),
             new EventTime(new DateTimeImmutable('2018-08-09T21:55:16+00:00')),
@@ -67,7 +66,6 @@ class JsonFormatterTest extends TestCase
         $cloudEvent = new CloudEvent(
             new EventId('89328232-6202-4758-8050-C9E4690431CA'),
             new Source(Uri::createFromString('github://pull')),
-            new SpecVersion('0.3'),
             new EventType('com.github.pull.create'),
         );
 
